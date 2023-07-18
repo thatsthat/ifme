@@ -36,8 +36,10 @@ import CrisisPrevention from 'widgets/CrisisPrevention';
 import CarePlanContacts from 'widgets/CarePlanContacts';
 import MomentTemplates from 'pages/MomentTemplates';
 import { scrollToTop } from './scrollToTop';
+import { stickyHeader } from './stickyHeader';
 
 scrollToTop();
+stickyHeader();
 
 // This is how react_on_rails can see the Components in the browser.
 ReactOnRails.register({

@@ -42,6 +42,8 @@ html {
   font-family: $font-family;
   font-weight: $font-weight-400;
   line-height: 1.4;
+  position: sticky;
+  top: 0;
 }
 
 .bodyModalOpen {
@@ -75,6 +77,15 @@ html {
 
 .htmlOptions {
   height: 100%;
+}
+
+#headerContainer {
+  position: sticky;
+  top: 0;
+}
+
+.stickyHeader {
+  background-color: $black-90;
 }
 
 main {
