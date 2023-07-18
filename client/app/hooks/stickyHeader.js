@@ -6,14 +6,14 @@ export const stickyHeader = () => {
     function (entries) {
       // no intersection
       if (entries[0].intersectionRatio === 0) {
-        console.log('iop');
+        console.log('aram sticky');
         document
           .querySelector('#headerContainer')
           .classList.add('stickyHeader');
       }
       // fully intersects
       else if (entries[0].intersectionRatio === 1) {
-        console.log('iep');
+        console.log('aram non-sticky');
         document
           .querySelector('#headerContainer')
           .classList.remove('stickyHeader');

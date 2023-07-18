@@ -9,6 +9,7 @@ import { HeaderProfile } from 'components/Header/HeaderProfile';
 import type { Profile, Link } from './types';
 import css from './Header.scss';
 import { useFocusTrap } from '../../hooks';
+import { stickyHeader } from '../../hooks';
 
 export type Props = {
   home: Link,
@@ -21,20 +22,19 @@ export type State = {
   mobileNavOpen: boolean,
 };
 
-export const Header = ({
-  home, links, mobileOnly, profile,
-}: Props): Node => {
+export const Header = ({ home, links, mobileOnly, profile }: Props): Node => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const navigationRef = useRef(null);
 
   useFocusTrap(navigationRef, mobileNavOpen);
+  stickyHeader();
 
   const toggle = (): void => {
     setMobileNavOpen((currentNavValue) => !currentNavValue);
   };
 
   const handleHamburgerKeyDown = (
-    event: SyntheticKeyboardEvent<HTMLElement>,
+    event: SyntheticKeyboardEvent<HTMLElement>
   ): void => {
     // Only toggle the menu if the user presses the Enter key or the space bar
     if (['Enter', ' '].includes(event.key)) {
@@ -56,20 +56,21 @@ export const Header = ({
     return <FontAwesomeIcon icon={faBars} />;
   };
 
-  const displayLinks = (): Node[] => links.map((link: Link) => (
-    <div className={css.headerLink} key={link.name}>
-      <a
-        href={link.url}
-        className={`${link.active ? css.headerActiveLink : ''} ${
-          link.hideInMobile ? css.headerHideInMobile : ''
-        }`}
-        data-method={`${link.dataMethod || ''}`}
-        rel={`${link.dataMethod ? 'nofollow' : ''}`}
-      >
-        {link.name}
-      </a>
-    </div>
-  ));
+  const displayLinks = (): Node[] =>
+    links.map((link: Link) => (
+      <div className={css.headerLink} key={link.name}>
+        <a
+          href={link.url}
+          className={`${link.active ? css.headerActiveLink : ''} ${
+            link.hideInMobile ? css.headerHideInMobile : ''
+          }`}
+          data-method={`${link.dataMethod || ''}`}
+          rel={`${link.dataMethod ? 'nofollow' : ''}`}
+        >
+          {link.name}
+        </a>
+      </div>
+    ));
 
   const displayDesktop = (): Node => (
     <div
@@ -127,8 +128,6 @@ export const Header = ({
   );
 };
 
-export default ({
-  home, links, mobileOnly, profile,
-}: Props): Node => (
+export default ({ home, links, mobileOnly, profile }: Props): Node => (
   <Header home={home} links={links} mobileOnly={mobileOnly} profile={profile} />
 );
