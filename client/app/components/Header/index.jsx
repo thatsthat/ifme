@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useRef, type Node } from 'react';
+import React, { useEffect, useState, useRef, type Node } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import renderHTML from 'react-render-html';
@@ -26,8 +26,11 @@ export const Header = ({ home, links, mobileOnly, profile }: Props): Node => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const navigationRef = useRef(null);
 
+  useEffect(() => {
+    (() => {})();
+  }, []);
+
   useFocusTrap(navigationRef, mobileNavOpen);
-  stickyHeader();
 
   const toggle = (): void => {
     setMobileNavOpen((currentNavValue) => !currentNavValue);
@@ -122,6 +125,7 @@ export const Header = ({ home, links, mobileOnly, profile }: Props): Node => {
         tabIndex="-1"
       >
         {displayDesktop()}
+        {stickyHeader()}
         {mobileNavOpen ? displayMobile() : null}
       </div>
     </header>
